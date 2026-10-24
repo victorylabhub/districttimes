@@ -13,7 +13,7 @@
 <meta property="og:type" content="{{ 'article' if a else 'website' }}">
 <meta property="og:title" content="{{ title or 'District Times' }}">
 <meta property="og:description" content="{{ lede or site.description }}">
-<meta property="og:image" content="https://{{ site.domain }}{{ og_image or '/static/img/site/og.jpg' }}">
+<meta property="og:image" content="https://{{ site.domain }}{{ (og_image|img(1200)) if og_image else '/static/img/site/og.jpg' }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#003B5B">
 <link rel="preload" href="/static/fonts/newsreader-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>

@@ -6,3 +6,8 @@
 
 [build.environment]
   PYTHON_VERSION = "3.12"
+
+# Licensed photos (e.g. Wikimedia Commons) are fetched and cached by Netlify Image CDN
+# and served from our own domain.
+[images]
+  remote_images = ["https://upload\\.wikimedia\\.org/.*"]

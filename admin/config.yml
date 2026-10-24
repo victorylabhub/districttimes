@@ -73,10 +73,11 @@ collections:
       - { label: "Author role (optional)", name: author_role, widget: string, required: false }
       - { label: Publication date, name: date, widget: datetime }
       - { label: "Updated (only for substantive changes)", name: updated, widget: datetime, required: false }
-      - { label: Main image, name: image, widget: image, required: false }
+      - { label: "Main image (upload, or paste a Wikimedia Commons file URL)", name: image, widget: image, required: false }
       - { label: "Image description (alt text)", name: image_alt, widget: string, required: false, hint: "Describe what the image shows, for readers who cannot see it." }
       - { label: Image caption, name: image_caption, widget: string, required: false }
-      - { label: "Image credit", name: image_credit, widget: string, required: false }
+      - { label: "Image credit (author / source / license)", name: image_credit, widget: string, required: false, hint: "Example: Photo: Jane Doe / Wikimedia Commons, CC BY-SA 4.0" }
+      - { label: "Image source page (license link)", name: image_source, widget: string, required: false }
       - { label: Body, name: body, widget: markdown }
       - label: Sources
         name: sources

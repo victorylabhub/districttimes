@@ -32,6 +32,18 @@ def fmt_date(d, short=False):
 
 
 env.filters["date"] = fmt_date
+
+
+def img(src, w=1200):
+    """Serve every image through Netlify Image CDN from our own domain.
+    Remote (licensed) images are fetched by Netlify, never by the reader's browser."""
+    from urllib.parse import quote
+    if not src:
+        return ""
+    return f"/.netlify/images?url={quote(src, safe='')}&w={w}&fm=webp&q=75"
+
+
+env.filters["img"] = img
 env.globals["today"] = fmt_date(dt.datetime.now(TZ))
 MD = lambda s: markdown.markdown((s or "").strip(), extensions=["extra", "sane_lists", "smarty"])
 

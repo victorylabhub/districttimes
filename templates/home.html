@@ -6,7 +6,7 @@
   {% set lead = articles[0] %}
   <section class="lead" aria-label="Top stories">
     <article class="lead-main">
-      {% if lead.image %}<a class="card-img" href="{{ lead.url }}" tabindex="-1" aria-hidden="true"><img src="{{ lead.image }}" alt="" fetchpriority="high"></a>{% endif %}
+      {% if lead.image %}<a class="card-img" href="{{ lead.url }}" tabindex="-1" aria-hidden="true"><img src="{{ lead.image|img(1400) }}" alt="" fetchpriority="high"></a>{% endif %}
       {{ kicker(lead, sections) }}
       <h2 class="hl hl-xl"><a href="{{ lead.url }}">{{ lead.title }}</a></h2>
       <p class="dek dek-l">{{ lead.dek }}</p>

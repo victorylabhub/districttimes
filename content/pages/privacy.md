@@ -9,7 +9,7 @@ This notice explains how District Times, published by Atlas Media Network, LLC (
 
 - We do not use contact forms, newsletter sign-up forms, comment systems or user accounts for readers.
 - We do not use advertising, analytics or tracking cookies, and we do not sell or share personal information.
-- We do not embed third-party social media widgets, video players or advertising scripts. Fonts and images are served from our own website.
+- We do not embed third-party social media widgets, video players or advertising scripts. Fonts and images are served from our own website. Some photographs are freely licensed images from Wikimedia Commons; our hosting provider retrieves and caches them, so your browser does not connect to Wikimedia.
 
 ## Information processed by our hosting provider
 

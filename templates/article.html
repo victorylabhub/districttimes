@@ -12,7 +12,7 @@
     </div>
   </header>
   {% if a.image %}
-  <figure class="story-img"><img src="{{ a.image }}" alt="{{ a.image_alt or '' }}">{% if a.image_caption or a.image_credit %}<figcaption>{{ a.image_caption or '' }}{% if a.image_credit %} <span class="credit">{{ a.image_credit }}</span>{% endif %}</figcaption>{% endif %}</figure>
+  <figure class="story-img"><img src="{{ a.image|img(1400) }}" alt="{{ a.image_alt or '' }}">{% if a.image_caption or a.image_credit %}<figcaption>{{ a.image_caption or '' }}{% if a.image_credit %} <span class="credit">{% if a.image_source %}<a href="{{ a.image_source }}" rel="noopener">{{ a.image_credit }}</a>{% else %}{{ a.image_credit }}{% endif %}</span>{% endif %}</figcaption>{% endif %}</figure>
   {% endif %}
   <div class="prose">{{ a.html|safe }}</div>
   {% if a.correction %}<aside class="correction"><h2>Correction</h2><p>{{ a.correction }}</p></aside>{% endif %}

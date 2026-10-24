@@ -8,7 +8,7 @@
 
 {% macro card(a, sections, size="m", img=True, h="h3") -%}
 <article class="card card-{{ size }}">
-  {% if img and a.image %}<a class="card-img" href="{{ a.url }}" tabindex="-1" aria-hidden="true"><img src="{{ a.image }}" alt="" loading="lazy"></a>{% endif %}
+  {% if img and a.image %}<a class="card-img" href="{{ a.url }}" tabindex="-1" aria-hidden="true"><img src="{{ a.image|img(800) }}" alt="" loading="lazy"></a>{% endif %}
   {{ kicker(a, sections) }}
   <{{ h }} class="hl"><a href="{{ a.url }}">{{ a.title }}</a></{{ h }}>
   {% if size in ("l", "m") %}<p class="dek">{{ a.dek }}</p>{% endif %}
