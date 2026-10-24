@@ -14,8 +14,8 @@ backend:
     uploadMedia: "Upload image: {{path}}"
 
 publish_mode: editorial_workflow
-site_url: https://districttimes.org
-display_url: https://districttimes.org
+site_url: https://districtimes.com
+display_url: https://districtimes.com
 logo_url: /static/img/site/logo.png
 
 media_folder: static/img/articles

@@ -3,7 +3,7 @@ title: Privacy notice
 lede: What information this website collects, and what it does not.
 updated: 2026-10-23
 ---
-This notice explains how District Times, published by Atlas Media Network, LLC ("we"), handles information about visitors to districttimes.org.
+This notice explains how District Times, published by Atlas Media Network, LLC ("we"), handles information about visitors to districtimes.com.
 
 ## What we do not collect
 

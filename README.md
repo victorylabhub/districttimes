@@ -1,11 +1,11 @@
-# District Times (districttimes.org)
+# District Times (districtimes.com)
 
 Local news for Washington, D.C. A business unit of Atlas Media Network, LLC.
 
 Static site in Python (Jinja2 + Markdown), newsroom panel with Decap CMS at `/admin/`, hosted on Netlify with automatic deploys from GitHub.
 
 ## Branches
-- `main` = production (districttimes.org). Merging into `main` publishes.
+- `main` = production (districtimes.com). Merging into `main` publishes.
 - Any other branch (e.g. `borrador`) = Netlify preview only.
 
 ## Content
@@ -29,5 +29,5 @@ Uses the GitHub backend through Netlify's OAuth provider. In Netlify: Project co
 - Privacy notice: legal review pending.
 - Vector (SVG) or high-resolution logo to replace `static/img/site/logo.png`.
 - Set `"prelaunch": false` in `site.json`.
-- Connect the domain `districttimes.org` in Netlify and enable HTTPS.
+- Connect the domain `districtimes.com` in Netlify and enable HTTPS.
 - Do not use the identity-board image that shows the WMATA Metro "M" sign (third-party trademark).

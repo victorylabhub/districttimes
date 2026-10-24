@@ -1,5 +1,5 @@
 # Netlify builds the site from this repository.
-# main = production (districttimes.org). Any other branch = preview only.
+# main = production (districtimes.com). Any other branch = preview only.
 [build]
   command = "pip install -r requirements.txt && python3 build.py"
   publish = "dist"
