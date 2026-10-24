@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% from "macros.html" import card, wardlist %}
+{% block main %}
+<div class="wrap">
+  <header class="sec-h">
+    <h1 class="hl">{{ title }}</h1>
+    <p class="sec-lede">{{ lede }}</p>
+    {% if page == "neighborhoods" %}{{ wardlist(wards, current_ward) }}{% endif %}
+  </header>
+  {% if items %}
+  <div class="lead lead-sec">
+    {{ card(items[0], sections, "l", True, "h2") }}
+    <div class="lead-side">{% for a in items[1:4] %}{{ card(a, sections, "s", False, "h2") }}{% endfor %}</div>
+  </div>
+  {% if items[4:] %}<div class="grid4">{% for a in items[4:] %}{{ card(a, sections, "s", True, "h2") }}{% endfor %}</div>{% endif %}
+  {% else %}
+  <p class="empty">No articles have been published here yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

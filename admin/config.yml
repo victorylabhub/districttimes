@@ -1,0 +1,99 @@
+# District Times newsroom panel (Decap CMS).
+# Each article is saved as a Markdown file in the repository. With the editorial
+# workflow, drafts live on their own branch (pull request); "Publish" merges into
+# main, which triggers a new Netlify production deploy.
+backend:
+  name: github
+  repo: victorylabhub/districttimes
+  branch: main
+  base_url: https://api.netlify.com
+  commit_messages:
+    create: "New article: {{slug}}"
+    update: "Edit article: {{slug}}"
+    delete: "Delete article: {{slug}}"
+    uploadMedia: "Upload image: {{path}}"
+
+publish_mode: editorial_workflow
+site_url: https://districttimes.org
+display_url: https://districttimes.org
+logo_url: /static/img/site/logo.png
+
+media_folder: static/img/articles
+public_folder: /static/img/articles
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    description: "Every article must be signed, dated and list at least one source with a link. The site will not build an article that is missing any of these."
+    folder: content/articles
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} — {{author}} ({{date | date('YYYY-MM-DD')}})"
+    sortable_fields: [date, title, author]
+    view_filters:
+      - { label: "Local News", field: section, pattern: local-news }
+      - { label: "Neighborhoods", field: section, pattern: neighborhoods }
+      - { label: "Politics & Government", field: section, pattern: politics }
+    fields:
+      - { label: Headline, name: title, widget: string }
+      - label: Section
+        name: section
+        widget: select
+        options:
+          - { label: "Local News", value: local-news }
+          - { label: "Neighborhoods", value: neighborhoods }
+          - { label: "Politics & Government", value: politics }
+      - { label: "Kicker (optional label above the headline, e.g. Ward 2 or Housing)", name: kicker, widget: string, required: false }
+      - label: Wards
+        name: wards
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - { label: Ward 1, value: ward-1 }
+          - { label: Ward 2, value: ward-2 }
+          - { label: Ward 3, value: ward-3 }
+          - { label: Ward 4, value: ward-4 }
+          - { label: Ward 5, value: ward-5 }
+          - { label: Ward 6, value: ward-6 }
+          - { label: Ward 7, value: ward-7 }
+          - { label: Ward 8, value: ward-8 }
+      - label: Topics
+        name: tags
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - { label: "D.C. Council", value: dc-council }
+      - { label: "Standfirst (one or two sentences)", name: dek, widget: text }
+      - { label: "Byline (reporter's full name)", name: author, widget: string }
+      - { label: "Author role (optional)", name: author_role, widget: string, required: false }
+      - { label: Publication date, name: date, widget: datetime }
+      - { label: "Updated (only for substantive changes)", name: updated, widget: datetime, required: false }
+      - { label: Main image, name: image, widget: image, required: false }
+      - { label: "Image description (alt text)", name: image_alt, widget: string, required: false, hint: "Describe what the image shows, for readers who cannot see it." }
+      - { label: Image caption, name: image_caption, widget: string, required: false }
+      - { label: "Image credit", name: image_credit, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }
+      - label: Sources
+        name: sources
+        widget: list
+        min: 1
+        hint: "Link the primary source for every key fact."
+        fields:
+          - { label: Source name, name: title, widget: string }
+          - { label: Link, name: url, widget: string, pattern: ['^https?://', "Must be a full link starting with http:// or https://"] }
+          - { label: "Note (optional)", name: note, widget: string, required: false }
+      - { label: "Correction note (only if the article was corrected)", name: correction, widget: text, required: false }
+
+  - name: pages
+    label: Fixed pages
+    files:
+      - { name: about, label: About us, file: content/pages/about.md, fields: &pagefields [ { label: Title, name: title, widget: string }, { label: Summary, name: lede, widget: string, required: false }, { label: Last updated, name: updated, widget: date }, { label: Body, name: body, widget: markdown } ] }
+      - { name: standards, label: Editorial standards, file: content/pages/standards.md, fields: *pagefields }
+      - { name: corrections, label: Corrections policy, file: content/pages/corrections.md, fields: *pagefields }
+      - { name: contact, label: Contact, file: content/pages/contact.md, fields: *pagefields }
+      - { name: privacy, label: Privacy notice, file: content/pages/privacy.md, fields: *pagefields }

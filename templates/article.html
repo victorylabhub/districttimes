@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "macros.html" import card, kicker, sechead %}
+{% block main %}
+<article class="story">
+  <header class="story-h">
+    <p>{{ kicker(a, sections) }}{% for w in a.wards %} <a class="kick kick-w" href="/neighborhoods/{{ w }}/">{{ w|replace("ward-", "Ward ") }}</a>{% endfor %}</p>
+    <h1 class="hl">{{ a.title }}</h1>
+    <p class="dek dek-l">{{ a.dek }}</p>
+    <div class="meta">
+      <p>By <strong>{{ a.author }}</strong>{% if a.author_role %}, {{ a.author_role }}{% endif %}</p>
+      <p>Published <time datetime="{{ a.date.isoformat() }}">{{ a.date|date }}</time>{% if a.updated %} · Updated <time datetime="{{ a.updated.isoformat() }}">{{ a.updated|date }}</time>{% endif %} · {{ a.minutes }} min read</p>
+    </div>
+  </header>
+  {% if a.image %}
+  <figure class="story-img"><img src="{{ a.image }}" alt="{{ a.image_alt or '' }}">{% if a.image_caption or a.image_credit %}<figcaption>{{ a.image_caption or '' }}{% if a.image_credit %} <span class="credit">{{ a.image_credit }}</span>{% endif %}</figcaption>{% endif %}</figure>
+  {% endif %}
+  <div class="prose">{{ a.html|safe }}</div>
+  {% if a.correction %}<aside class="correction"><h2>Correction</h2><p>{{ a.correction }}</p></aside>{% endif %}
+  <section class="sources" aria-labelledby="h-src">
+    <h2 id="h-src">Sources</h2>
+    <ol>{% for s in a.sources %}<li><a href="{{ s.url }}" rel="noopener">{{ s.title }}</a>{% if s.note %} — {{ s.note }}{% endif %}</li>{% endfor %}</ol>
+  </section>
+  <p class="note">District Times corrects errors promptly. To report one, write to <a href="mailto:{{ site.email }}">{{ site.email }}</a>. <a href="/corrections/">Corrections policy</a>.</p>
+</article>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"NewsArticle","headline":{{ a.title|tojson }},"description":{{ a.dek|tojson }},
+ "datePublished":"{{ a.date.isoformat() }}"{% if a.updated %},"dateModified":"{{ a.updated.isoformat() }}"{% endif %},
+ {% if a.image %}"image":["https://{{ site.domain }}{{ a.image }}"],{% endif %}
+ "author":{"@type":"Person","name":{{ a.author|tojson }}},
+ "publisher":{"@type":"NewsMediaOrganization","name":"District Times","url":"https://{{ site.domain }}/"},
+ "mainEntityOfPage":"https://{{ site.domain }}{{ a.url }}"}
+</script>
+{% if related %}
+<section class="wrap related" aria-labelledby="h-rel">
+  <div id="h-rel">{{ sechead("More in " ~ sec.title, "/" ~ a.section ~ "/") }}</div>
+  <div class="grid4">{% for r in related %}{{ card(r, sections, "s") }}{% endfor %}</div>
+</section>
+{% endif %}
+{% endblock %}

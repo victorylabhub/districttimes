@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap">
+  <header class="sec-h">
+    <h1 class="hl">Search</h1>
+    <form class="search" role="search" onsubmit="return false">
+      <label for="q">Search articles by headline, summary or author</label>
+      <input id="q" type="search" autocomplete="off" spellcheck="false">
+    </form>
+  </header>
+  <p id="search-status" class="empty" aria-live="polite"></p>
+  <ol id="search-results" class="results"></ol>
+</div>
+{% endblock %}

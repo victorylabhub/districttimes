@@ -1,0 +1,14 @@
+{
+  "local-news": {
+    "title": "Local News",
+    "lede": "What is happening across Washington, D.C.: city services, public safety, schools, housing, transit and the economy."
+  },
+  "neighborhoods": {
+    "title": "Neighborhoods",
+    "lede": "Reporting from the District's eight wards and the neighborhoods within them."
+  },
+  "politics": {
+    "title": "Politics & Government",
+    "lede": "The Mayor's office, the D.C. Council, Advisory Neighborhood Commissions, and the federal decisions that shape the District."
+  }
+}

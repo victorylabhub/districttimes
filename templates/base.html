@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if title %}{{ title }} | {% endif %}District Times</title>
+<meta name="description" content="{{ lede or site.description }}">
+{% if site.prelaunch %}<meta name="robots" content="noindex">{% endif %}
+<link rel="icon" href="/static/img/site/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/static/img/site/icon-180.png">
+<link rel="alternate" type="application/rss+xml" title="District Times" href="/rss.xml">
+<meta property="og:site_name" content="District Times">
+<meta property="og:type" content="{{ 'article' if a else 'website' }}">
+<meta property="og:title" content="{{ title or 'District Times' }}">
+<meta property="og:description" content="{{ lede or site.description }}">
+<meta property="og:image" content="https://{{ site.domain }}{{ og_image or '/static/img/site/og.jpg' }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#003B5B">
+<link rel="preload" href="/static/fonts/newsreader-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/site.css?v={{ site.v }}">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"District Times","url":"https://{{ site.domain }}/",
+ "logo":"https://{{ site.domain }}/static/img/site/logo-large.png",
+ "ownershipFundingInfo":"https://{{ site.domain }}/about/","correctionsPolicy":"https://{{ site.domain }}/corrections/",
+ "ethicsPolicy":"https://{{ site.domain }}/standards/","email":{{ site.email|tojson }},
+ "parentOrganization":{"@type":"Organization","name":{{ site.owner|tojson }},"url":{{ site.owner_url|tojson }},"address":{{ site.address|tojson }}}}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+{% if site.prelaunch %}<p class="prelaunch">Preview — District Times has not launched yet.</p>{% endif %}
+<header class="masthead">
+  <div class="wrap">
+    <div class="util">
+      <span>{{ today }}</span>
+      <span class="util-links"><a href="/about/">About us</a><a href="/rss.xml">RSS</a><a href="/search/" class="util-search">Search</a></span>
+    </div>
+    {% if page == 'home' %}<h1 class="mast">{% else %}<div class="mast mast-s">{% endif %}
+      <a href="/" aria-label="District Times — front page"><img src="/static/img/site/logo.png" alt="District Times" width="408" height="91"></a>
+    {% if page == 'home' %}</h1><p class="mast-tag">{{ site.tagline }}</p>{% else %}</div>{% endif %}
+  </div>
+  <nav class="nav" aria-label="Sections">
+    <div class="wrap nav-in">
+      <a href="/"{% if page == 'home' %} aria-current="page"{% endif %}>Home</a>
+      {% for key, s in sections.items() %}<a href="/{{ key }}/"{% if page == key %} aria-current="page"{% endif %}>{{ s.title }}</a>{% endfor %}
+      <a href="/politics/dc-council/"{% if page == 'dc-council' %} aria-current="page"{% endif %}>D.C. Council</a>
+      <a href="/about/"{% if page == 'about' %} aria-current="page"{% endif %}>About</a>
+    </div>
+  </nav>
+</header>
+<main id="main" tabindex="-1">
+{% block main %}{% endblock %}
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="fcols">
+      <div class="f-brand">
+        <span class="flogo"><img src="/static/img/site/logo.png" alt="District Times" width="204" height="46" loading="lazy"></span>
+        <div class="dots" aria-hidden="true"><i></i><u></u><i></i><u></u><i></i><u class="r"></u></div>
+        <p>{{ site.tagline }}</p>
+      </div>
+      <nav aria-label="Sections"><h2>Sections</h2>
+        {% for key, s in sections.items() %}<a href="/{{ key }}/">{{ s.title }}</a>{% endfor %}
+        <a href="/politics/dc-council/">D.C. Council</a></nav>
+      <nav aria-label="About District Times"><h2>About</h2>
+        <a href="/about/">About us</a><a href="/standards/">Editorial standards</a><a href="/corrections/">Corrections</a><a href="/contact/">Contact</a></nav>
+      <nav aria-label="Legal"><h2>Legal</h2>
+        <a href="/privacy/">Privacy notice</a><a href="mailto:{{ site.email }}">{{ site.email }}</a></nav>
+    </div>
+    <p class="legal">District Times is published by {{ site.owner }}, {{ site.address }}. District Times is not affiliated with any other publication of a similar name. © {{ site.year }} {{ site.owner }}.</p>
+  </div>
+</footer>
+<script src="/static/site.js?v={{ site.v }}" defer></script>
+</body>
+</html>

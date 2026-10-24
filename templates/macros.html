@@ -1,0 +1,25 @@
+{% macro kicker(a, sections) -%}
+<a class="kick" href="/{{ a.section }}/">{{ a.kicker or sections[a.section].title }}</a>
+{%- endmacro %}
+
+{% macro byline(a, full=False) -%}
+<p class="by">By <strong>{{ a.author }}</strong> · <time datetime="{{ a.date.isoformat() }}">{{ a.date|date(not full) }}</time>{% if full %} · {{ a.minutes }} min read{% endif %}</p>
+{%- endmacro %}
+
+{% macro card(a, sections, size="m", img=True, h="h3") -%}
+<article class="card card-{{ size }}">
+  {% if img and a.image %}<a class="card-img" href="{{ a.url }}" tabindex="-1" aria-hidden="true"><img src="{{ a.image }}" alt="" loading="lazy"></a>{% endif %}
+  {{ kicker(a, sections) }}
+  <{{ h }} class="hl"><a href="{{ a.url }}">{{ a.title }}</a></{{ h }}>
+  {% if size in ("l", "m") %}<p class="dek">{{ a.dek }}</p>{% endif %}
+  {{ byline(a, size == "l") }}
+</article>
+{%- endmacro %}
+
+{% macro sechead(title, href=None, more=None, h="h2") -%}
+<div class="secthead"><{{ h }}>{% if href %}<a href="{{ href }}">{{ title }}</a>{% else %}{{ title }}{% endif %}</{{ h }}><span class="rail" aria-hidden="true"></span>{% if more %}<a class="more" href="{{ href }}">{{ more }} <span aria-hidden="true">→</span></a>{% endif %}</div>
+{%- endmacro %}
+
+{% macro wardlist(wards, current=None) -%}
+<ul class="wards">{% for w in wards %}<li><a href="/neighborhoods/{{ w }}/"{% if w == current %} aria-current="page"{% endif %}>Ward {{ loop.index }}</a></li>{% endfor %}</ul>
+{%- endmacro %}

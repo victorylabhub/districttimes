@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% from "macros.html" import card, sechead, wardlist, kicker, byline %}
+{% block main %}
+<div class="wrap">
+{% if articles %}
+  {% set lead = articles[0] %}
+  <section class="lead" aria-label="Top stories">
+    <article class="lead-main">
+      {% if lead.image %}<a class="card-img" href="{{ lead.url }}" tabindex="-1" aria-hidden="true"><img src="{{ lead.image }}" alt="" fetchpriority="high"></a>{% endif %}
+      {{ kicker(lead, sections) }}
+      <h2 class="hl hl-xl"><a href="{{ lead.url }}">{{ lead.title }}</a></h2>
+      <p class="dek dek-l">{{ lead.dek }}</p>
+      {{ byline(lead, True) }}
+    </article>
+    <div class="lead-side">
+      {% for a in articles[1:4] %}{{ card(a, sections, "s", loop.first) }}{% endfor %}
+    </div>
+  </section>
+  {% set shown = articles[:4] %}
+  {% for key, s in sections.items() %}
+    {% set items = by_section[key]|reject("in", shown)|list %}
+    {% if items %}
+    <section aria-labelledby="h-{{ key }}">
+      <div id="h-{{ key }}">{{ sechead(s.title, "/" ~ key ~ "/", "More " ~ s.title) }}</div>
+      {% if key == "politics" %}
+        <div class="grid3">
+          {{ card(items[0], sections, "m") }}
+          <div class="stack">{% for a in items[1:4] %}{{ card(a, sections, "s", False) }}{% endfor %}</div>
+          <div class="stack">{% for a in items[4:7] %}{{ card(a, sections, "s", False) }}{% endfor %}</div>
+        </div>
+      {% else %}
+        <div class="grid4">{% for a in items[:4] %}{{ card(a, sections, "s") }}{% endfor %}</div>
+      {% endif %}
+      {% if key == "neighborhoods" %}{{ wardlist(wards) }}{% endif %}
+    </section>
+    {% endif %}
+  {% endfor %}
+  {% if not by_section["neighborhoods"]|reject("in", shown)|list %}
+  <section aria-labelledby="h-wards">
+    <div id="h-wards">{{ sechead("Neighborhoods", "/neighborhoods/", "All wards") }}</div>
+    {{ wardlist(wards) }}
+  </section>
+  {% endif %}
+{% else %}
+  <section class="welcome" aria-labelledby="h-welcome">
+    <img src="/static/img/site/p2.webp" alt="Historic and modern office buildings along a downtown street in Washington, D.C." width="1200" height="565">
+    <div class="welcome-txt">
+      <p class="kick">From the newsroom</p>
+      <h2 id="h-welcome" class="hl hl-xl">District Times is preparing its first reports.</h2>
+      <p class="dek dek-l">We cover local news, the District's eight wards, and politics and government in Washington, D.C. Every article is signed, dated and linked to its sources.</p>
+      <p class="by"><a href="/standards/">Read our editorial standards</a> · <a href="/about/">Who owns District Times</a></p>
+    </div>
+  </section>
+  {% for key, s in sections.items() %}
+  <section aria-labelledby="h-{{ key }}">
+    <div id="h-{{ key }}">{{ sechead(s.title, "/" ~ key ~ "/") }}</div>
+    <p class="sec-lede">{{ s.lede }}</p>
+    {% if key == "neighborhoods" %}{{ wardlist(wards) }}{% endif %}
+  </section>
+  {% endfor %}
+{% endif %}
+</div>
+{% endblock %}

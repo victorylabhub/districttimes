@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block main %}
+<article class="story page">
+  <header class="story-h">
+    <h1 class="hl">{{ pg.title }}</h1>
+    {% if pg.lede %}<p class="dek dek-l">{{ pg.lede }}</p>{% endif %}
+    {% if pg.updated %}<p class="by">Last updated <time datetime="{{ pg.updated.date().isoformat() }}">{{ pg.updated|date }}</time></p>{% endif %}
+  </header>
+  <div class="prose">{{ pg.html|safe }}</div>
+</article>
+{% endblock %}
