@@ -3,7 +3,7 @@
   "tagline": "Local news for Washington, D.C.",
   "description": "District Times reports on local news, neighborhoods, and politics and government in Washington, D.C.",
   "domain": "districttimes.org",
-  "prelaunch": true,
+  "prelaunch": false,
   "owner": "Atlas Media Network, LLC",
   "owner_url": "https://www.atlasmedianetwork.org",
   "address": "36 Russ Street, 3rd Floor, Hartford, CT 06106, United States",
